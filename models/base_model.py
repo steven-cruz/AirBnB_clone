@@ -30,8 +30,8 @@ class BaseModel:
         st = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
         return st
     def save(self):
-        up = datetime.datetime.now()
-        updated_at = datetime.datetime.isoformat(up)
+        up = datetime.now()
+        updated_at = datetime.isoformat(up)
         return updated_at
     def to_dict(self):
         dic = self.__dict__
