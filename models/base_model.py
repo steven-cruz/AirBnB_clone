@@ -27,7 +27,7 @@ class BaseModel:
     """====================================================================="""
     def __str__(self):
         name = name = self.__class__.__name__
-        st = ("[{}] ({}) <{}>".format(name, self.id, self.__dict__))
+        st = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
         return st
     def save(self):
         up = datetime.datetime.now()
