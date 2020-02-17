@@ -1,12 +1,9 @@
 #!/usr/bin/python3
-''' base class '''
-
-
 import uuid
 import json
 from datetime import datetime
 
-
+""" Class commentary """
 class BaseModel:
     """ Class description. """
     """====================================================================="""
@@ -25,7 +22,6 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-
     """====================================================================="""
     """============================ METHODS ================================"""
     """====================================================================="""
@@ -33,12 +29,10 @@ class BaseModel:
         name = name = self.__class__.__name__
         st = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
         return st
-
     def save(self):
         up = datetime.now()
         updated_at = datetime.isoformat(up)
         return updated_at
-
     def to_dict(self):
         dic = self.__dict__
         dic['__class__'] = self.__class__.__name__
@@ -59,4 +53,4 @@ class BaseModel:
     """-----------"""
     """====================================================================="""
     """==================== SETTERS & GETTERS =============================="""
-    """====================================================================="""
+    """=====================================================================""" 
