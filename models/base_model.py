@@ -1,9 +1,19 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
+=======
+""" Class commentary """
+
+
+>>>>>>> a93233b49aee710b24f2e6dce9fdd58167174d66
 import uuid
 import json
 from datetime import datetime
 
+<<<<<<< HEAD
 """ Class commentary """
+=======
+
+>>>>>>> a93233b49aee710b24f2e6dce9fdd58167174d66
 class BaseModel:
     """ Class description. """
     """====================================================================="""
@@ -27,12 +37,23 @@ class BaseModel:
     """====================================================================="""
     def __str__(self):
         name = name = self.__class__.__name__
+<<<<<<< HEAD
         st = ("[{}] ({}) <{}>".format(name, self.id, self.__dict__))
         return st
     def save(self):
         up = datetime.datetime.now()
         updated_at = datetime.datetime.isoformat(up)
         return updated_at
+=======
+        st = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
+        return st
+
+    def save(self):
+        up = datetime.now()
+        updated_at = datetime.isoformat(up)
+        return updated_at
+
+>>>>>>> a93233b49aee710b24f2e6dce9fdd58167174d66
     def to_dict(self):
         dic = self.__dict__
         dic['__class__'] = self.__class__.__name__
