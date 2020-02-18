@@ -18,9 +18,6 @@ class Test_BaseModel(unittest.TestCase):
         """Checks if the docstring exists"""
         self.assertTrue(len(BaseModel.__doc__) > 1)
         self.assertTrue(len(BaseModel.__init__.__doc__) > 1)
-    ##    self.assertTrue(len(BaseModel.__str__.__doc__) > 1)
-    ##    self.assertTrue(len(BaseModel.save.__doc__) > 1)
-    ##    self.assertTrue(len(BaseModel.to_dict.__doc__) > 1)
 
     def test_pep8(self):
         """Pep8 Test"""
