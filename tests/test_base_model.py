@@ -102,4 +102,3 @@ class Test_BaseModel(unittest.TestCase):
         b1 = BaseModel()
         b1.save()
         b_dict = b1.to_dict()
-   ##    self.assertNotEqual(b_dict['created_at'], b_dict['updated_at'])
