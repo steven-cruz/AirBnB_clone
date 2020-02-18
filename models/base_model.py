@@ -7,56 +7,60 @@ import json
 from datetime import datetime
 
 
-class BaseModel:
-    """ Class description. """
+class BaseModel():
+    """ This class is the base model for all the AirBnB subclasses. """
+
     """====================================================================="""
-    """=================== INIT & CLASS VARIABLES =========================="""
+    """= INIT & CLASS VARIABLES ============================================"""
     """====================================================================="""
-    def __init__(self,  *args, **kwargs):
-        """ Initializes the class """
-        if args is not None and len(args) > 0:
-            pass
-        if kwargs:
-            for key, item in kwargs.items():
-                if key in ['created_at', 'updated_at']:
-                    item = datetime.strptime(item, "%Y-%m-%dT%H:%M:%S.%f")
-                if key not in ['__class__']:
-                    setattr(self, key, item)
-        else:
+
+    def __init__(self, *args, **kwargs):
+        """ Initializes the class. """
+        if len(kwargs) == 0:
             self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
+
+        else:
+            for key in kwargs:
+                if key == 'created_at' or key == 'updated_at':
+                    formt = "%Y-%m-%dT%H:%M:%S.%f"
+                    self.__dict__[key] = datetime.strptime(
+                        kwargs[key], formt)
+                elif key != '__class__':
+                    self.__dict__[key] = kwargs[key]
+
     """====================================================================="""
-    """============================ METHODS ================================"""
+    """== METHODS =========================================================="""
     """====================================================================="""
+
+    """-----------"""
+    """- Public --"""
+    """-----------"""
+
     def __str__(self):
-        name = name = self.__class__.__name__
-        st = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
-        return st
+        """ Defines what the class should print. """
+        name = self.__class__.__name__
+        text = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
+        return text
 
     def save(self):
+        """ Updates the public instance attribute "update_at" with the current
+            datetime.                                                       """
         up = datetime.now()
-        updated_at = datetime.isoformat(up)
-        return updated_at
+        storage.save()
 
     def to_dict(self):
-        dic = self.__dict__
-        dic['__class__'] = self.__class__.__name__
-        dic['created_at'] = datetime.isoformat(self.created_at)
-        dic['updated_at'] = datetime.isoformat(self.updated_at)
-        return dic
+        """ Returns a dictionary containing all keys/values of __dict__ of the
+            instance.                                                       """
+        a_dict = {}
+        a_dict['__class__'] = self.__class__.__name__
 
-    """----------"""
-    """- Public -"""
-    """----------"""
-    """-----------"""
-    """- Private -"""
-    """-----------"""
-    """-----------"""
-    """- Class ---"""
-    """-----------"""
-    """-----------"""
-    """- Static --"""
-    """-----------"""
-    """====================================================================="""
-    """==================== SETTERS & GETTERS =============================="""
-    """====================================================================="""
+        if self.__dict__:
+            for key, value in self.__dict__.items():
+                if isinstance(value, datetime) is True:
+                    value = value.isoformat()
+                a_dict[key] = value
+
+        return a_dict
