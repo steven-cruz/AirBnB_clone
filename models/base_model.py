@@ -1,9 +1,12 @@
 #!/usr/bin/python3
+""" Class commentary """
+
+
 import uuid
 import json
 from datetime import datetime
 
-""" Class commentary """
+
 class BaseModel:
     """ Class description. """
     """====================================================================="""
@@ -29,16 +32,19 @@ class BaseModel:
         name = name = self.__class__.__name__
         st = ("[{}] ({}) {}".format(name, self.id, self.__dict__))
         return st
+
     def save(self):
         up = datetime.now()
         updated_at = datetime.isoformat(up)
         return updated_at
+
     def to_dict(self):
         dic = self.__dict__
         dic['__class__'] = self.__class__.__name__
         dic['created_at'] = datetime.isoformat(self.created_at)
         dic['updated_at'] = datetime.isoformat(self.updated_at)
         return dic
+
     """----------"""
     """- Public -"""
     """----------"""
