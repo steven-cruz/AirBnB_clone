@@ -7,7 +7,7 @@ import sys
 import models
 from models.base_model import BaseModel
 from models import storage
-import models.user import User
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,8 +15,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
     group_class = {'BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
-                   'Review'
-                   }
+                   'Review'}
 
     def emptyline(self):
         """
