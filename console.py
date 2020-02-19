@@ -5,6 +5,7 @@ import shlex
 import cmd
 import sys
 import models
+from datetime import datetime
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -14,8 +15,14 @@ class HBNBCommand(cmd.Cmd):
     """ class HBNB command line console """
 
     prompt = '(hbnb) '
-    group_class = {'BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
-                   'Review'}
+    group_class = {'BaseModel': BaseModel,
+                   'User': User,
+                   'State': BaseModel,
+                   'City': BaseModel,
+                   'Amenity': BaseModel,
+                   'Place': BaseModel,
+                   'Review': BaseModel
+                  }
 
     def emptyline(self):
         """
@@ -34,14 +41,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """ Save in the json file and print the ID """
-        if self.group_class.get(arg):
+        if HBNBCommand.group_class[arg]:
             obj = self.group_class[arg]()
-            print("{}".format(getatt(obj, 'id')))
+            print("{}".format(getattr(obj, 'id')))
             obj.save()
         elif not arg:
             print("** class name missing **")
         elif arg not in self.group_class:
             print("** class doesn't exist **")
+            return
 
     def do_show(self, arg):
         """
