@@ -2,10 +2,12 @@
 """ making user inherence from basemodel """
 
 
+import models
 from models.base_model import BaseModel
 
-class Place:
 
+class Place:
+    """ Public Class attributes """
     city_id = ""
     user_id = ""
     name = ""
@@ -16,7 +18,4 @@ class Place:
     price_by_night = 0
     latitude = 0.0
     longitude = 0.0
-    amenity_ids = ""
-
-    def __init__(self, *args, **kwargs)
-        super().__init__(self, *args, **kwargs)
+    amenity_ids = []
