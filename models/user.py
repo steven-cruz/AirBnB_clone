@@ -2,11 +2,12 @@
 """ making user inherence from basemodel """
 
 
-Basemodel = __import__.(base_model).BaseModel
+
+from models.base_model import BaseModel
 
 
 class User(BaseModel):
-""" the new class """
+
 
     email = ""
     password = ""
