@@ -1,4 +1,4 @@
-#!/bin/usr/python3
+#!/usr/bin/python3
 """ console for the Holberton AirBnB_clone project """
 
 import cmd
