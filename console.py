@@ -5,10 +5,16 @@ import shlex
 import cmd
 import sys
 import models
+import json
 from datetime import datetime
 from models.base_model import BaseModel
-from models import storage
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,11 +23,11 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     group_class = {'BaseModel': BaseModel,
                    'User': User,
-                   'State': BaseModel,
-                   'City': BaseModel,
-                   'Amenity': BaseModel,
-                   'Place': BaseModel,
-                   'Review': BaseModel
+                   'State': State,
+                   'City': City,
+                   'Amenity': Amenity,
+                   'Place': Place,
+                   'Review': Review
                   }
 
     def emptyline(self):
