@@ -1,67 +1,47 @@
-""" Class commentary """
+#!/usr/bin/python3
+"""Class FileStorage"""
 
 
 import json
+import models
+from models.base_model import BaseModel
+from datetime import datetime
 
 
-class FileStorage():
-    """ This class handels Json files with instances, it has 2 private class
-        attributes and 4 public instance methods"""
 
-    """====================================================================="""
-    """= INIT & CLASS VARIABLES ============================================"""
-    """====================================================================="""
+class FileStorage:
+    """Private class attributes for Class FileStorage"""
+    __file_path = 'file.json'
+    __objects = {}
 
-    def __init__(self):
-        """ Initializes the class. """
-        self.__file_path = "file.json"
-        self.__objects = {}
-
-    """====================================================================="""
-    """== METHODS =========================================================="""
-    """====================================================================="""
-
-    """-----------"""
-    """- Public --"""
-    """-----------"""
     def all(self):
-        """ Returns a dictionary containing __objects. """
-        return self.__objects
+        """Returns the dictionary with objects"""
+        return FileStorage.__objects
 
     def new(self, obj):
-        """ Creates a new dictionary representation to save into a file. """
-        key = obj.__class__.__name__ + "." + obj.id
-        self.__objects[key] = obj.to_dict()
+        """Returns __objects with obj set as key"""
+        key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
-        """ Saves the data into the HDD via a file. """
-        with open(self.__file_path, 'a') as jfile:
-            json.dump(self.__objects, jfile)
+        """Serializes __objects to JSON file inside"""
+        save_file = self.__file_path
+        new_dict = {}
+        for key, item in self.__objects.items():
+            new_dict[key] = item.to_dict()
+        with open(save_file, "w", encoding='utf-8') as new_file:
+            json.dump(new_dict, new_file)
 
     def reload(self):
-        """ Loads the data from the HDD into an instance. """
+        """Deserializes the JSON file to __objects
+        only if the JSON file exists; otherwise, do nothing
+        """
+        reload_dict = {}
         try:
-            with open(self.__file_path, 'r') as jfile:
-                json_load = json.loads(jfile.read())
-                for key, val in json_load.items():
-                    new_key = eval(val['__class__'])(**val)
-                    self.__objects = new_key
-
-        except:
+            with open(FileStorage.__file_path, mode="r") as a_file:
+                reload_dict = (json.load(a_file))
+                for key, value in reload_dict.items():
+                    obj = eval(value['__class__'])(**value)
+                    self.__objects[key] = obj
+        except FileNotFoundError:
             pass
-
-    """-----------"""
-    """- Private -"""
-    """-----------"""
-
-    """-----------"""
-    """-- Class --"""
-    """-----------"""
-
-    """-----------"""
-    """-- Static -"""
-    """-----------"""
-
-    """====================================================================="""
-    """== SETTERS & GETTERS ================================================"""
-    """====================================================================="""
