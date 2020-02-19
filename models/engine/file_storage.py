@@ -9,7 +9,6 @@ from models.user import User
 from datetime import datetime
 
 
-
 class FileStorage:
     """Private class attributes for Class FileStorage"""
     __file_path = 'file.json'
