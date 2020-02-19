@@ -2,13 +2,11 @@
 """ making city inherence from basemodel """
 
 
+import models
 from models.base_model import BaseModel
 
 
 class City:
-
+    """ pulic class attributes """
     state_id = ""
     name = ""
-
-    def __init__(self, *args, **kwargs)
-        super().__init__(self, *args, **kwargs)
