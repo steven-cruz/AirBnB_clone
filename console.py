@@ -45,16 +45,21 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, arg):
-        """ Save in the json file and print the ID """
-        if HBNBCommand.group_class[arg]:
-            obj = self.group_class[arg]()
-            print("{}".format(getattr(obj, 'id')))
-            obj.save()
-        elif not arg:
+        """
+        Creates a new instance of the AirBNB class
+        and saves it to a JSON file
+        Usage: create <class name>
+        """
+        args = arg.split(" ")
+        if not args[0]:
             print("** class name missing **")
-        elif arg not in self.group_class:
+            pass
+        elif args[0] in HBNBCommand.classes:
+            new = eval(args[0])()
+            print(new.id)
+            models.storage.save()
+        else:
             print("** class doesn't exist **")
-            return
 
     def do_show(self, arg):
         """
