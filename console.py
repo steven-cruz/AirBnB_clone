@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """ Save in the json file and print the ID """
-        if HBNBCommand.group_class[arg]:
+        if arg in HBNBCommand.group_class:
             obj = self.group_class[arg]()
             print("{}".format(getattr(obj, 'id')))
             obj.save()
